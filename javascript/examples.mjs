@@ -1,12 +1,13 @@
-const baseUrl = process.env.ANTOPS_BASE_URL ?? "https://api.antops.dev";
-const apiKey = process.env.ANTOPS_API_KEY;
+const baseUrl = process.env.ANTOPS_BASE_URL ?? "https://artificial-works-risk-apis.p.rapidapi.com";
+const rapidApiHost = process.env.ANTOPS_RAPIDAPI_HOST ?? "artificial-works-risk-apis.p.rapidapi.com";
+const rapidApiKey = process.env.ANTOPS_RAPIDAPI_KEY;
 
-if (!apiKey) throw new Error("Set ANTOPS_API_KEY before running this example.");
+if (!rapidApiKey) throw new Error("Set ANTOPS_RAPIDAPI_KEY before running this example.");
 
 async function call(path, body) {
   const response = await fetch(`${baseUrl}${path}`, {
     method: "POST",
-    headers: { "content-type": "application/json", "x-api-key": apiKey },
+    headers: { "content-type": "application/json", "x-rapidapi-host": rapidApiHost, "x-rapidapi-key": rapidApiKey },
     body: JSON.stringify(body),
   });
   if (!response.ok) throw new Error(`${response.status}: ${await response.text()}`);

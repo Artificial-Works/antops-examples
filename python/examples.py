@@ -1,18 +1,23 @@
-"""Run with ANTOPS_API_KEY=YOUR_RAPIDAPI_KEY python examples.py."""
+"""Run with ANTOPS_RAPIDAPI_KEY=YOUR_RAPIDAPI_KEY python examples.py."""
 
 import json
 import os
 from urllib.request import Request, urlopen
 
-BASE_URL = os.getenv("ANTOPS_BASE_URL", "https://api.antops.dev")
-API_KEY = os.environ["ANTOPS_API_KEY"]
+BASE_URL = os.getenv("ANTOPS_BASE_URL", "https://artificial-works-risk-apis.p.rapidapi.com")
+RAPIDAPI_HOST = os.getenv("ANTOPS_RAPIDAPI_HOST", "artificial-works-risk-apis.p.rapidapi.com")
+RAPIDAPI_KEY = os.environ["ANTOPS_RAPIDAPI_KEY"]
 
 
 def call(path: str, payload: dict) -> dict:
     request = Request(
         f"{BASE_URL}{path}",
         data=json.dumps(payload).encode(),
-        headers={"Content-Type": "application/json", "X-API-Key": API_KEY},
+        headers={
+            "Content-Type": "application/json",
+            "X-RapidAPI-Host": RAPIDAPI_HOST,
+            "X-RapidAPI-Key": RAPIDAPI_KEY,
+        },
         method="POST",
     )
     with urlopen(request, timeout=30) as response:  # nosec B310: fixed HTTPS API base URL

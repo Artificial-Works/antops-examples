@@ -2,7 +2,8 @@ import { writeFileSync } from "node:fs";
 
 const baseUrl = "{{base_url}}";
 const headers = [
-  { key: "X-API-Key", value: "{{antops_api_key}}" },
+  { key: "X-RapidAPI-Key", value: "{{rapidapi_key}}", type: "secret" },
+  { key: "X-RapidAPI-Host", value: "{{rapidapi_host}}" },
   { key: "Content-Type", value: "application/json" },
 ];
 
@@ -24,12 +25,13 @@ const collection = {
   info: {
     _postman_id: "0cf69b15-46be-47c0-a010-96804d51f53f",
     name: "AntOps API Suite",
-    description: "Set the AntOps Production environment, replace {{antops_api_key}} with a RapidAPI key, then send any request. One subscription includes all five current modules. Responses are automated technical signals, not legal, compliance, credit, or security certification.",
+    description: "Set the AntOps RapidAPI environment, replace {{rapidapi_key}} with a RapidAPI consumer key, then send any request. One subscription includes all five current modules. Responses are automated technical signals, not legal, compliance, credit, or security certification.",
     schema: "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
   },
   variable: [
-    { key: "base_url", value: "https://api.antops.dev" },
-    { key: "antops_api_key", value: "YOUR_RAPIDAPI_KEY", type: "string" },
+    { key: "base_url", value: "https://artificial-works-risk-apis.p.rapidapi.com" },
+    { key: "rapidapi_host", value: "artificial-works-risk-apis.p.rapidapi.com" },
+    { key: "rapidapi_key", value: "YOUR_RAPIDAPI_KEY", type: "secret" },
   ],
   item: [
     { name: "01 Domain Health", description: "Public DNS, MX, SPF, DMARC and TLS signals.", item: [request("Check Domain Health", "/v1/domain/check", { domain: "example.com" }, "Checks one public domain. This is a technical signal, not a deliverability guarantee.")] },

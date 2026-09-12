@@ -9,27 +9,29 @@ access to all five modules:
 - Website Security Snapshot
 - UK Company Intelligence
 
-The production base URL is `https://api.antops.dev`. Obtain a RapidAPI subscription from the
+The production gateway URL is `https://artificial-works-risk-apis.p.rapidapi.com`. Obtain a RapidAPI subscription from the
 [AntOps listing](https://rapidapi.com/ogulcanaydogan/api/artificial-works-risk-apis), then set a
 local environment variable. Do not commit a key.
 
 ```bash
 cp .env.example .env
-export ANTOPS_API_KEY="YOUR_RAPIDAPI_KEY"
-export ANTOPS_BASE_URL="https://api.antops.dev"
+export ANTOPS_BASE_URL="https://artificial-works-risk-apis.p.rapidapi.com"
+export ANTOPS_RAPIDAPI_HOST="artificial-works-risk-apis.p.rapidapi.com"
+export ANTOPS_RAPIDAPI_KEY="YOUR_RAPIDAPI_KEY"
 ```
 
 ## Quick start
 
 ```bash
 curl -X POST "$ANTOPS_BASE_URL/v1/domain/check" \
-  -H "X-API-Key: $ANTOPS_API_KEY" \
+  -H "X-RapidAPI-Key: $ANTOPS_RAPIDAPI_KEY" \
+  -H "X-RapidAPI-Host: $ANTOPS_RAPIDAPI_HOST" \
   -H "Content-Type: application/json" \
   -d '{"domain":"example.com"}'
 ```
 
-If you call AntOps through the RapidAPI gateway rather than the public base URL, use the host and
-headers shown in the marketplace-generated code snippet for your application.
+All production examples use the RapidAPI gateway, so subscription quotas and consumer
+authentication are applied consistently.
 
 ## Examples
 
@@ -42,7 +44,7 @@ headers shown in the marketplace-generated code snippet for your application.
 
 ## CI guidance
 
-The supplied workflows are templates. A repository consuming them must add `ANTOPS_API_KEY` as a
+The supplied workflows are templates. A repository consuming them must add `ANTOPS_RAPIDAPI_KEY` as a
 GitHub Actions secret. They never execute Docker or Terraform; they submit static Docker text or
 Terraform plan/source content to AntOps and fail only on the policy coded in the workflow.
 

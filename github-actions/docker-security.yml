@@ -13,11 +13,11 @@ jobs:
       - uses: actions/checkout@v4
       - name: Call AntOps
         env:
-          ANTOPS_API_KEY: ${{ secrets.ANTOPS_API_KEY }}
+          ANTOPS_RAPIDAPI_KEY: ${{ secrets.ANTOPS_RAPIDAPI_KEY }}
         run: |
           jq -n --rawfile content Dockerfile '{scan_type:"dockerfile", content:$content}' > request.json
-          curl --fail-with-body -sS -X POST https://api.antops.dev/v1/docker-scanner/scan \
-            -H "X-API-Key: $ANTOPS_API_KEY" -H "Content-Type: application/json" \
+          curl --fail-with-body -sS -X POST https://artificial-works-risk-apis.p.rapidapi.com/v1/docker-scanner/scan \
+            -H "X-RapidAPI-Key: $ANTOPS_RAPIDAPI_KEY" -H "X-RapidAPI-Host: artificial-works-risk-apis.p.rapidapi.com" -H "Content-Type: application/json" \
             --data @request.json > antops-result.json
           jq . antops-result.json
       - name: Fail on critical findings
