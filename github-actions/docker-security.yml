@@ -1,0 +1,24 @@
+name: Docker configuration signal
+
+on:
+  pull_request:
+    paths: ["Dockerfile", "docker-compose*.yml", "docker-compose*.yaml"]
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Call AntOps
+        env:
+          ANTOPS_API_KEY: ${{ secrets.ANTOPS_API_KEY }}
+        run: |
+          jq -n --rawfile content Dockerfile '{scan_type:"dockerfile", content:$content}' > request.json
+          curl --fail-with-body -sS -X POST https://api.antops.dev/v1/docker-scanner/scan \
+            -H "X-API-Key: $ANTOPS_API_KEY" -H "Content-Type: application/json" \
+            --data @request.json > antops-result.json
+          jq . antops-result.json
+      - name: Fail on critical findings
+        run: test "$(jq '.summary.critical // 0' antops-result.json)" -eq 0

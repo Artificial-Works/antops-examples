@@ -1,0 +1,191 @@
+{
+  "info": {
+    "_postman_id": "0cf69b15-46be-47c0-a010-96804d51f53f",
+    "name": "AntOps API Suite",
+    "description": "Set the AntOps Production environment, replace {{antops_api_key}} with a RapidAPI key, then send any request. One subscription includes all five current modules. Responses are automated technical signals, not legal, compliance, credit, or security certification.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://api.antops.dev"
+    },
+    {
+      "key": "antops_api_key",
+      "value": "YOUR_RAPIDAPI_KEY",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "01 Domain Health",
+      "description": "Public DNS, MX, SPF, DMARC and TLS signals.",
+      "item": [
+        {
+          "name": "Check Domain Health",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{antops_api_key}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"domain\": \"example.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{base_url}}/v1/domain/check",
+            "description": "Checks one public domain. This is a technical signal, not a deliverability guarantee."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "02 Docker Security",
+      "description": "Static Dockerfile and Docker Compose analysis. Submitted content is never executed.",
+      "item": [
+        {
+          "name": "Scan Dockerfile",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{antops_api_key}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"scan_type\": \"dockerfile\",\n  \"content\": \"FROM python:3.12-slim\\nUSER root\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{base_url}}/v1/docker-scanner/scan",
+            "description": ""
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "03 Terraform Risk",
+      "description": "Static Terraform source or terraform show -json analysis. Terraform is never executed.",
+      "item": [
+        {
+          "name": "Analyze Terraform Source",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{antops_api_key}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"analysis_type\": \"terraform\",\n  \"content\": \"resource \\\"aws_security_group\\\" \\\"web\\\" {}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{base_url}}/v1/terraform-risk/analyze",
+            "description": ""
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "04 Website Security Snapshot",
+      "description": "Automated public website technical signals, not legal advice or certification.",
+      "item": [
+        {
+          "name": "Check Website Snapshot",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{antops_api_key}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"url\": \"https://example.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{base_url}}/v1/website-snapshot/check",
+            "description": ""
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "05 UK Company Intelligence",
+      "description": "Analyzes supplied Companies House-style public/company data. It does not independently enrich data or make credit decisions.",
+      "item": [
+        {
+          "name": "Analyze UK Company",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{antops_api_key}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"company_number\": \"12345678\",\n  \"company_name\": \"Example Ltd\",\n  \"company_status\": \"active\",\n  \"sic_codes\": [\n    \"62012\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{base_url}}/v1/uk-company-intelligence/analyze",
+            "description": ""
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
