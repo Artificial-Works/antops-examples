@@ -23,11 +23,10 @@ truth. Do not add endpoints or claims not present there. Never commit real Rapid
 
 The collection and environment were revalidated on 2026-09-12. They use the production base URL,
 represent all five current modules, and contain only `YOUR_RAPIDAPI_KEY` placeholders; no real
-credential is committed. Postman does not have an active owner session in the available browser,
-so public publishing could not be completed. Once signed in, import
-`postman/AntOps.postman_collection.json` and `postman/AntOps.postman_environment.json`, set
-`antops_api_key` only in the private environment, send a representative request, then use
-Share > Publish. Record the resulting public URL in this file and in the website handoff.
+credential is committed. They have been imported into the public workspace at
+`https://www.postman.com/ogulcanaydogans-team/antops-api-suite`; the public collection URL is
+`https://www.postman.com/ogulcanaydogans-team/antops-api-suite/collection/zrd1z80/antops-api-suite`.
+Set `antops_api_key` only in a private environment before sending a representative request.
 
 ## Verification
 
@@ -37,6 +36,6 @@ with `npx --yes --package typescript@5 tsc --noEmit --target ES2022 typescript/e
 
 ## Next Action
 
-The only remaining distribution action is owner authentication to Postman and publication of the
-prepared collection. After publication, point the website Postman resource at its public URL;
-then collect real acquisition and usage data before starting new API development.
+Set a real RapidAPI consumer key only in a private Postman environment and verify one
+representative 200 request. Then collect real acquisition and usage data before starting new API
+development.
