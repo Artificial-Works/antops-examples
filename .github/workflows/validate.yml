@@ -1,0 +1,28 @@
+name: Validate examples
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Generate and validate Postman artifacts
+        run: |
+          node scripts/generate-postman.mjs
+          jq empty postman/*.json
+      - name: Check example syntax
+        run: |
+          node --check javascript/examples.mjs
+          npx --yes --package typescript@5 tsc --noEmit --target ES2022 --module NodeNext --moduleResolution NodeNext typescript/examples.ts
+          python -m py_compile python/examples.py
+          bash -n curl/*.sh
