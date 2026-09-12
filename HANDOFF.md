@@ -2,6 +2,15 @@
 
 Last updated: 2026-09-12
 
+## Repository Naming Standardization
+
+Canonical GitHub repositories are `Artificial-Works/antops-platform`,
+`Artificial-Works/antops-site`, `Artificial-Works/antops-metrics`, and
+`Artificial-Works/antops-examples`. Historical names `artificial-works-api` and `antops` refer to
+the renamed platform and site repositories respectively. Local and B450 directory names remain
+unchanged intentionally because they are deployment identifiers, not canonical repository names.
+No direct private platform repository link is added to these public developer examples.
+
 ## Purpose
 
 This is the public, credential-free developer distribution repository for AntOps. It is
