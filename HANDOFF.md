@@ -10,7 +10,7 @@ deliberately separate from the private production API repository.
 ## Included
 
 - Curl examples for all five current modules.
-- Python, JavaScript, and TypeScript examples using `ANTOPS_API_KEY`.
+- Python, JavaScript, and TypeScript examples using `ANTOPS_RAPIDAPI_KEY`.
 - GitHub Actions workflows for Terraform and Docker static-analysis checks.
 - An importable Postman Collection v2.1 and environment template.
 
@@ -21,12 +21,14 @@ truth. Do not add endpoints or claims not present there. Never commit real Rapid
 
 ## Postman publishing
 
-The collection and environment were revalidated on 2026-09-12. They use the production base URL,
-represent all five current modules, and contain only `YOUR_RAPIDAPI_KEY` placeholders; no real
-credential is committed. They have been imported into the public workspace at
+The collection and environment were revalidated on 2026-09-12. They use the RapidAPI gateway,
+`X-RapidAPI-Key`, and `X-RapidAPI-Host`; represent all five current modules; and contain only
+`YOUR_RAPIDAPI_KEY` placeholders. No real credential is committed. They have been imported into
+the public workspace at
 `https://www.postman.com/ogulcanaydogans-team/antops-api-suite`; the public collection URL is
 `https://www.postman.com/ogulcanaydogans-team/antops-api-suite/collection/zrd1z80/antops-api-suite`.
-Set `antops_api_key` only in a private environment before sending a representative request.
+A private Postman consumer request to `POST /v1/domain/check` returned `200 OK` on 2026-09-12;
+the test key was cleared afterward.
 
 ## Verification
 
@@ -36,6 +38,4 @@ with `npx --yes --package typescript@5 tsc --noEmit --target ES2022 typescript/e
 
 ## Next Action
 
-Set a real RapidAPI consumer key only in a private Postman environment and verify one
-representative 200 request. Then collect real acquisition and usage data before starting new API
-development.
+Collect real acquisition and usage data before starting new API development.
