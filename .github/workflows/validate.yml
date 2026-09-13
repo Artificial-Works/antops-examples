@@ -23,6 +23,9 @@ jobs:
       - name: Check example syntax
         run: |
           node --check javascript/examples.mjs
+          node --check javascript/recurring-products.mjs
           npx --yes --package typescript@5 tsc --noEmit --target ES2022 --module NodeNext --moduleResolution NodeNext typescript/examples.ts
+          npx --yes --package typescript@5 tsc --noEmit --target ES2022 --module NodeNext --moduleResolution NodeNext typescript/recurring-products.ts
           python -m py_compile python/examples.py
+          python -m py_compile python/recurring_products.py webhooks/verify.py
           bash -n curl/*.sh

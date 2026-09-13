@@ -1,6 +1,6 @@
 # AntOps Examples Handoff
 
-Last updated: 2026-09-12
+Last updated: 2026-09-13
 
 ## Repository Naming Standardization
 
@@ -18,15 +18,26 @@ deliberately separate from the private production API repository.
 
 ## Included
 
-- Curl examples for all five current modules.
-- Python, JavaScript, and TypeScript examples using `ANTOPS_RAPIDAPI_KEY`.
-- GitHub Actions workflows for Terraform and Docker static-analysis checks.
+- Curl examples for the five legacy RapidAPI modules and the four direct workspace products.
+- Python, JavaScript, and TypeScript examples for legacy RapidAPI and direct workspace access.
+- GitHub Actions workflows for Terraform/Docker static checks and DevOps Change Risk policy gates.
 - An importable Postman Collection v2.1 and environment template.
 
 ## Contract source
 
 The public OpenAPI document at `https://api.antops.dev/openapi.json` is the runtime source of
-truth. Do not add endpoints or claims not present there. Never commit real RapidAPI keys.
+truth. The five legacy checker APIs use the RapidAPI gateway. Company Watch, Infrastructure
+Monitoring, Tender Intelligence and DevOps Change Risk use a directly issued workspace key at
+`https://api.antops.dev`; do not claim that their workspace capabilities are included in a
+RapidAPI plan. Never commit either kind of real credential.
+
+## Wave 4.5 additions
+
+The direct workspace examples add Company Watch, Infrastructure Monitoring, Tender Intelligence
+and DevOps Change Risk curl paths; credential-free Python, JavaScript and TypeScript samples;
+an Action that fails only when AntOps returns a `blocked` Change Risk decision; and constant-time
+HMAC webhook verification examples. They use `ANTOPS_API_KEY` and
+`ANTOPS_DIRECT_BASE_URL=https://api.antops.dev` and contain no real secret.
 
 ## Postman publishing
 

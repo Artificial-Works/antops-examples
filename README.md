@@ -1,7 +1,15 @@
 # AntOps examples
 
-Copyable examples for the AntOps developer risk API suite. One RapidAPI subscription provides
-access to all five modules:
+Copyable examples for AntOps operational intelligence and evidence APIs. RapidAPI provides access
+to the five legacy checker modules. Direct customer workspaces use `https://api.antops.dev` for
+the four recurring operational products:
+
+- Company & Supplier Watch
+- MSP Infrastructure Monitoring
+- Tender Intelligence
+- DevOps Change Risk
+
+One RapidAPI subscription provides access to the five legacy modules:
 
 - Email & Domain Health
 - Docker Security Scanner
@@ -33,6 +41,20 @@ curl -X POST "$ANTOPS_BASE_URL/v1/domain/check" \
 All production examples use the RapidAPI gateway, so subscription quotas and consumer
 authentication are applied consistently.
 
+## Direct workspace products
+
+For Company Watch, Infrastructure Monitoring, Tender Intelligence and DevOps Change Risk, obtain
+an AntOps workspace key from your owner key or customer onboarding. Do not put it in source control.
+
+```bash
+export ANTOPS_DIRECT_BASE_URL="https://api.antops.dev"
+export ANTOPS_API_KEY="YOUR_ANTOPS_WORKSPACE_KEY"
+```
+
+See [`curl/`](curl) for Company Watch, infrastructure, tender and change-risk requests, and
+[`github-actions/change-risk.yml`](github-actions/change-risk.yml) for a reusable CI policy gate.
+Webhook verification examples are in [`webhooks/`](webhooks).
+
 ## Examples
 
 - [`curl/`](curl): one shell request per module.
@@ -40,6 +62,7 @@ authentication are applied consistently.
 - [`javascript/examples.mjs`](javascript/examples.mjs): Node 18+ `fetch` examples.
 - [`typescript/examples.ts`](typescript/examples.ts): typed Node 18+ `fetch` examples.
 - [`github-actions/`](github-actions): Terraform and Docker CI patterns.
+- [`webhooks/`](webhooks): HMAC-SHA256 verification without a framework dependency.
 - [`postman/`](postman): importable collection and environment files.
 
 ## CI guidance

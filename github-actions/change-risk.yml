@@ -1,0 +1,31 @@
+name: AntOps change risk
+
+on:
+  pull_request:
+
+jobs:
+  assess:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Assess deployment changes
+        env:
+          ANTOPS_API_KEY: ${{ secrets.ANTOPS_API_KEY }}
+        run: |
+          python - <<'PY' > payload.json
+          import json
+          from pathlib import Path
+          names = [name for name in ("Dockerfile", "compose.yaml", "main.tf", "openapi.yaml") if Path(name).exists()]
+          print(json.dumps({"revision": "${{ github.sha }}", "files": [{"path": name, "content": Path(name).read_text()} for name in names]}))
+          PY
+          curl --fail-with-body -sS -X POST https://api.antops.dev/v1/change-risk/analyses \
+            -H "Content-Type: application/json" -H "X-API-Key: $ANTOPS_API_KEY" \
+            --data @payload.json > assessment.json
+          python - <<'PY'
+          import json, sys
+          result = json.load(open("assessment.json"))
+          print(f"AntOps {result['decision']}: {result['risk_level']} score={result['risk_score']}")
+          for finding in result["findings"]:
+              print(f"{finding['severity']}: {finding['path']} {finding['message']}")
+          sys.exit(result["decision"] == "blocked")
+          PY
