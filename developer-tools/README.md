@@ -9,7 +9,7 @@ AntOps product logic.
 ## CLI
 
 ```bash
-python -m pip install antops
+python -m pip install 'git+https://github.com/Artificial-Works/antops-developer.git#subdirectory=packages/python'
 export ANTOPS_API_KEY="YOUR_ANTOPS_WORKSPACE_KEY"
 antops auth status
 antops company lookup GB 00000006 --json
@@ -58,13 +58,17 @@ The Action sends bounded static text only; it does not execute Docker, Terraform
 {
   "mcpServers": {
     "antops": {
-      "command": "npx",
-      "args": ["-y", "@antops/mcp"],
+      "command": "node",
+      "args": ["/absolute/path/to/antops-developer/packages/mcp/dist/index.js"],
       "env": { "ANTOPS_API_KEY": "configure in your secret manager" }
     }
   }
 }
 ```
+
+Clone `antops-developer` and run `npm install && npm run build` before using this source-distribution
+configuration. PyPI and npm publishing remain intentionally disabled until organization-owned trusted
+publisher settings are configured.
 
 The MCP server supports bounded company lookup, domain check/status, tender search/matches, Change
 Risk analysis and document scan tools. It deliberately has no destructive, billing, key-management
