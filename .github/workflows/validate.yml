@@ -29,3 +29,4 @@ jobs:
           python -m py_compile python/examples.py
           python -m py_compile python/recurring_products.py webhooks/verify.py
           bash -n curl/*.sh
+          test -s developer-tools/README.md

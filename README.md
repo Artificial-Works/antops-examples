@@ -55,6 +55,13 @@ See [`curl/`](curl) for Company Watch, infrastructure, tender and change-risk re
 [`github-actions/change-risk.yml`](github-actions/change-risk.yml) for a reusable CI policy gate.
 Webhook verification examples are in [`webhooks/`](webhooks).
 
+## CLI, SDKs, GitHub Action and MCP
+
+Use the maintained developer distribution tools in
+[`Artificial-Works/antops-developer`](https://github.com/Artificial-Works/antops-developer) rather
+than copying HTTP plumbing into a new integration. The [developer-tools quickstart](developer-tools)
+shows secure API-key handling, CLI/SDK calls, the bounded Change Risk Action and MCP configuration.
+
 ## Examples
 
 - [`curl/`](curl): one shell request per module.
@@ -64,6 +71,7 @@ Webhook verification examples are in [`webhooks/`](webhooks).
 - [`github-actions/`](github-actions): Terraform and Docker CI patterns.
 - [`webhooks/`](webhooks): HMAC-SHA256 verification without a framework dependency.
 - [`postman/`](postman): importable collection and environment files.
+- [`developer-tools/`](developer-tools): CLI, Python/TypeScript SDK, GitHub Action and MCP setup.
 
 ## CI guidance
 
