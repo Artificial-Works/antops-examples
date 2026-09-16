@@ -5,17 +5,22 @@ on:
     branches: [main]
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version: 22
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
+      - run: npm ci
+      - run: npm audit --omit=dev --audit-level=high
       - name: Generate and validate Postman artifacts
         run: |
           node scripts/generate-postman.mjs
@@ -24,8 +29,8 @@ jobs:
         run: |
           node --check javascript/examples.mjs
           node --check javascript/recurring-products.mjs
-          npx --yes --package typescript@5 tsc --noEmit --target ES2022 --module NodeNext --moduleResolution NodeNext typescript/examples.ts
-          npx --yes --package typescript@5 tsc --noEmit --target ES2022 --module NodeNext --moduleResolution NodeNext typescript/recurring-products.ts
+          npm exec -- tsc --noEmit --target ES2022 --module NodeNext --moduleResolution NodeNext typescript/examples.ts
+          npm exec -- tsc --noEmit --target ES2022 --module NodeNext --moduleResolution NodeNext typescript/recurring-products.ts
           python -m py_compile python/examples.py
           python -m py_compile python/recurring_products.py webhooks/verify.py
           bash -n curl/*.sh

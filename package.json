@@ -1,0 +1,7 @@
+{
+  "name": "antops-examples",
+  "version": "0.1.0",
+  "devDependencies": {
+    "typescript": "5.9.3"
+  }
+}
