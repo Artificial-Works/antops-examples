@@ -43,8 +43,11 @@ authentication are applied consistently.
 
 ## Direct workspace products
 
-For Company Watch, Infrastructure Monitoring, Tender Intelligence and DevOps Change Risk, obtain
-an AntOps workspace key from your owner key or customer onboarding. Do not put it in source control.
+For Company Watch, Infrastructure Monitoring, Tender Intelligence and DevOps Change Risk, start a
+Free AntOps Workspace at [antops.dev](https://antops.dev), then create an API key
+in Workspace when you need programmatic access. RapidAPI subscriptions remain request-based checker
+access and do not include recurring Workspace monitoring, history, alerts or evidence. Do not put a
+workspace key in source control.
 
 ```bash
 export ANTOPS_DIRECT_BASE_URL="https://api.antops.dev"
