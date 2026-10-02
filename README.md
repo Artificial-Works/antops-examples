@@ -71,16 +71,17 @@ shows secure API-key handling, CLI/SDK calls, the bounded Change Risk Action and
 - [`python/examples.py`](python/examples.py): standard-library Python requests.
 - [`javascript/examples.mjs`](javascript/examples.mjs): Node 18+ `fetch` examples.
 - [`typescript/examples.ts`](typescript/examples.ts): typed Node 18+ `fetch` examples.
-- [`github-actions/`](github-actions): Terraform and Docker CI patterns.
+- [`github-actions/`](github-actions): Terraform and Docker CI patterns. The Change Risk example uses the maintained `Artificial-Works/antops-developer/actions/change-risk@v0.2.1` Action and reads only the listed static files.
 - [`webhooks/`](webhooks): HMAC-SHA256 verification without a framework dependency.
 - [`postman/`](postman): importable collection and environment files.
 - [`developer-tools/`](developer-tools): CLI, Python/TypeScript SDK, GitHub Action and MCP setup.
 
 ## CI guidance
 
-The supplied workflows are templates. A repository consuming them must add `ANTOPS_RAPIDAPI_KEY` as a
-GitHub Actions secret. They never execute Docker or Terraform; they submit static Docker text or
-Terraform plan/source content to AntOps and fail only on the policy coded in the workflow.
+The supplied workflows are templates. The direct-workspace Change Risk workflow requires the
+`ANTOPS_API_KEY` repository secret; RapidAPI checker examples use `ANTOPS_RAPIDAPI_KEY` only where
+they call the RapidAPI gateway. They never execute Docker or Terraform; they submit only the listed
+static files to AntOps and fail only when the active Change Risk policy blocks the change.
 
 ## Scope
 
