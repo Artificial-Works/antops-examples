@@ -27,6 +27,7 @@ jobs:
           jq empty postman/*.json
       - name: Check example syntax
         run: |
+          node scripts/verify-change-risk-action-version.mjs
           node --check javascript/examples.mjs
           node --check javascript/recurring-products.mjs
           npm exec -- tsc --noEmit --target ES2022 --module NodeNext --moduleResolution NodeNext typescript/examples.ts

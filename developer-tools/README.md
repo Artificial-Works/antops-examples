@@ -41,7 +41,7 @@ permissions:
   contents: read
 steps:
   - uses: actions/checkout@v4
-  - uses: Artificial-Works/antops-developer/actions/change-risk@v0.1.0
+  - uses: Artificial-Works/antops-developer/actions/change-risk@v0.2.1
     with:
       api-key: ${{ secrets.ANTOPS_API_KEY }}
       files: |
